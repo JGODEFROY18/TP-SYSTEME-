@@ -1,13 +1,13 @@
 //*********************************************************************************************
 //* Programme : Tpcloche.cpp date : 15/11/2022
 //*---------------------------------------------------------------------------------------------------------
-//* dernière mise a jour : 15/11/2022
+//* derniÃ¨re mise a jour : 15/11/2022
 //*
 //* Programmeur(s) : Cesar Alexis - Godefroy Jules Classe : BTSSN2
 //*
 //*--------------------------------------------------------------------------------------------------------
-//* BUT : Contrôler cloches
-//* Programmes associés : AUCUN
+//* BUT : ContrÃ´ler cloches
+//* Programmes associÃ©s : AUCUN
 //*********************************************************************************************
 
 #include "Tpcloches.h"
@@ -21,7 +21,7 @@ Tpcloches::Tpcloches(QWidget *parent)
 	QObject::connect(socket, SIGNAL(disconnected()), this, SLOT(onSocketDisconnected()));
 }
 
-// Vérification appuie sur bouton connexion
+// VÃ©rification appuie sur bouton connexion
 void Tpcloches::onConnectButtonClicked() {
 	QString ip = ui.IPEdit->text();
 	QString port = ui.PortEdit->text();
@@ -35,29 +35,29 @@ void Tpcloches::onConnectButtonClicked() {
 	}
 }
 
-// Vérification appuie sur bouton déconnexion
+// VÃ©rification appuie sur bouton dÃ©connexion
 void Tpcloches::onDisconnectButtonClicked() {
-	socket->disconnectFromHost(); // Si le bouton deconnexion est appuyé on se déconnecter du socket
+	socket->disconnectFromHost(); // Si le bouton deconnexion est appuyÃ© on se dÃ©connecter du socket
 }
 
-// Fonction vérification du statu de connexion
+// Fonction vÃ©rification du statu de connexion
 void Tpcloches::onSocketConnected() {
-	// Affiche connexion si on est connecté
+	// Affiche connexion si on est connectÃ©
 	ui.AffConnexion->setText("Connexion");
 }
 
-// Fonction vérification du statu de déconnexion
+// Fonction vÃ©rification du statu de dÃ©connexion
 void Tpcloches::onSocketDisconnected() {
-	// Affiche deconnexion si on est deconnecté (par défault déconnecter)
+	// Affiche deconnexion si on est deconnectÃ© (par dÃ©fault dÃ©connecter)
 	ui.AffConnexion->setText("Deconnexion");
 }
 
 void Tpcloches::BtnCloche1Clicked() {
 	if (socket->state() == QAbstractSocket::ConnectedState) {
-		char trameClocheMarche[12];
-		char trameClocheArret[12];
+		char trameClocheMarche[14];
+		char trameClocheArret[14];
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheMarche[0] = 0x00; // numero de transaction modbus
 		trameClocheMarche[1] = 0x00;
 		trameClocheMarche[2] = 0x00; // numero de protocole (0 pour MODBUS/TCP)
@@ -67,7 +67,7 @@ void Tpcloches::BtnCloche1Clicked() {
 		trameClocheMarche[6] = 0x00; // adresse xvay
 
 		// suite de la trame classique modbus
-		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : écriture)
+		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : Ã©criture)
 		trameClocheMarche[8] = 0x00; // mot 00 22 (mot 2 de l'automate)
 		trameClocheMarche[9] = 0x02;
 		trameClocheMarche[10] = 0x00; // valeur mot (18 en base 10 en l'occurence)
@@ -79,7 +79,7 @@ void Tpcloches::BtnCloche1Clicked() {
 		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheArret[0] = 0x00;
 		trameClocheArret[1] = 0x00;
 		trameClocheArret[2] = 0x00;
@@ -108,10 +108,10 @@ void Tpcloches::BtnCloche1Clicked() {
 
 void Tpcloches::BtnCloche2Clicked() {
 	if (socket->state() == QAbstractSocket::ConnectedState) {
-		char trameClocheMarche[12];
-		char trameClocheArret[12];
+		char trameClocheMarche[14];
+		char trameClocheArret[14];
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheMarche[0] = 0x00; // numero de transaction modbus
 		trameClocheMarche[1] = 0x00;
 		trameClocheMarche[2] = 0x00; // numero de protocole (0 pour MODBUS/TCP)
@@ -121,7 +121,7 @@ void Tpcloches::BtnCloche2Clicked() {
 		trameClocheMarche[6] = 0x00; // adresse xvay
 
 		// suite de la trame classique modbus
-		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : écriture)
+		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : Ã©criture)
 		trameClocheMarche[8] = 0x00; // mot 00 22 (mot 2 de l'automate)
 		trameClocheMarche[9] = 0x02;
 		trameClocheMarche[10] = 0x00; // valeur mot (18 en base 10 en l'occurence)
@@ -133,7 +133,7 @@ void Tpcloches::BtnCloche2Clicked() {
 		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheArret[0] = 0x00;
 		trameClocheArret[1] = 0x00;
 		trameClocheArret[2] = 0x00;
@@ -162,10 +162,10 @@ void Tpcloches::BtnCloche2Clicked() {
 
 void Tpcloches::BtnCloche3Clicked() {
 	if (socket->state() == QAbstractSocket::ConnectedState) {
-		char trameClocheMarche[12];
-		char trameClocheArret[12];
+		char trameClocheMarche[14];
+		char trameClocheArret[14];
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheMarche[0] = 0x00; // numero de transaction modbus
 		trameClocheMarche[1] = 0x00;
 		trameClocheMarche[2] = 0x00; // numero de protocole (0 pour MODBUS/TCP)
@@ -175,7 +175,7 @@ void Tpcloches::BtnCloche3Clicked() {
 		trameClocheMarche[6] = 0x00; // adresse xvay
 
 		// suite de la trame classique modbus
-		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : écriture)
+		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : Ã©criture)
 		trameClocheMarche[8] = 0x00; // mot 00 22 (mot 2 de l'automate)
 		trameClocheMarche[9] = 0x02;
 		trameClocheMarche[10] = 0x00; // valeur mot (18 en base 10 en l'occurence)
@@ -187,7 +187,7 @@ void Tpcloches::BtnCloche3Clicked() {
 		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheArret[0] = 0x00;
 		trameClocheArret[1] = 0x00;
 		trameClocheArret[2] = 0x00;
@@ -216,10 +216,10 @@ void Tpcloches::BtnCloche3Clicked() {
 
 void Tpcloches::BtnCloche4Clicked() {
 	if (socket->state() == QAbstractSocket::ConnectedState) {
-		char trameClocheMarche[12];
-		char trameClocheArret[12];
+		char trameClocheMarche[14];
+		char trameClocheArret[14];
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheMarche[0] = 0x00; // numero de transaction modbus
 		trameClocheMarche[1] = 0x00;
 		trameClocheMarche[2] = 0x00; // numero de protocole (0 pour MODBUS/TCP)
@@ -229,7 +229,7 @@ void Tpcloches::BtnCloche4Clicked() {
 		trameClocheMarche[6] = 0x00; // adresse xvay
 
 		// suite de la trame classique modbus
-		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : écriture)
+		trameClocheMarche[7] = 0x06; // code fonction (fonction 6 : Ã©criture)
 		trameClocheMarche[8] = 0x00; // mot 00 22 (mot 2 de l'automate)
 		trameClocheMarche[9] = 0x02;
 		trameClocheMarche[10] = 0x00; // valeur mot (18 en base 10 en l'occurence)
@@ -241,7 +241,7 @@ void Tpcloches::BtnCloche4Clicked() {
 		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
-		// en-tête MODBUS/TCP
+		// en-tÃªte MODBUS/TCP
 		trameClocheArret[0] = 0x00;
 		trameClocheArret[1] = 0x00;
 		trameClocheArret[2] = 0x00;
