@@ -184,7 +184,7 @@ void Tpcloches::BtnCloche3Clicked() {
 		trameClocheMarche[12] = 0x01; // CRC
 		trameClocheMarche[13] = 0x01;
 
-		QByteArray donneesMarche(trameClocheMarche, 12);
+		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
 		// en-tête MODBUS/TCP
@@ -206,7 +206,7 @@ void Tpcloches::BtnCloche3Clicked() {
 		trameClocheMarche[12] = 0x01; // CRC
 		trameClocheMarche[13] = 0x01;
 
-		QByteArray donneesArret(trameClocheArret, 12);
+		QByteArray donneesArret(trameClocheArret, 14);
 		socket->write(donneesArret);
 
 		ui.StatusCo->setText("La cloche (3) sonne");
@@ -238,7 +238,7 @@ void Tpcloches::BtnCloche4Clicked() {
 		trameClocheMarche[12] = 0x01; // CRC
 		trameClocheMarche[13] = 0x01;
 
-		QByteArray donneesMarche(trameClocheMarche, 12);
+		QByteArray donneesMarche(trameClocheMarche, 14);
 		socket->write(donneesMarche);
 
 		// en-tête MODBUS/TCP
@@ -260,7 +260,7 @@ void Tpcloches::BtnCloche4Clicked() {
 		trameClocheMarche[12] = 0x01; // CRC
 		trameClocheMarche[13] = 0x01;
 
-		QByteArray donneesArret(trameClocheArret, 12);
+		QByteArray donneesArret(trameClocheArret, 14);
 		socket->write(donneesArret);
 
 		ui.StatusCo->setText("La cloche (4) sonne");
